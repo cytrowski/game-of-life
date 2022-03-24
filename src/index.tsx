@@ -1,15 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Root } from './components/root/root';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Root } from "./components/root/root";
 
-import './index.css';
-import reportWebVitals from './reportWebVitals';
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import { initialize } from "./utils/engine";
+
+const { cellObservers } = initialize({ gridSize: 50, tickLength: 500 });
 
 ReactDOM.render(
   <React.StrictMode>
-    <Root />
+    <Root observers={cellObservers} />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

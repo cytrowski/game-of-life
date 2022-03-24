@@ -1,17 +1,18 @@
 import { memo, useEffect, useState } from "react";
+import { Observe } from "../../utils/subscriptions";
 import classNames from "./cell.module.css";
-
-export type SubscriptionCallback = (state: boolean) => void;
-export type Observe = (callback: SubscriptionCallback) => void;
 interface Props {
-  observe: Observe;
+  observe?: Observe;
 }
 
 export const Cell = memo<Props>(({ observe }) => {
   const [state, setState] = useState(false);
 
   useEffect(() => {
-    observe(setState);
+    if (!observe) {
+      return;
+    }
+    return observe(setState);
   }, [observe]);
 
   const className = `${classNames.cell} ${

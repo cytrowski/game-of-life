@@ -10,5 +10,5 @@
   width: 80vmin;
   height: 80vmin;
   background: lightblue;
-  grid-template-columns: repeat(50, 1fr [col-start]);
+  grid-template-columns: repeat(var(--board-size), 1fr [col-start]);
 }
