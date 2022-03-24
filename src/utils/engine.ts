@@ -41,6 +41,7 @@ const updateCellsMap = (target: CellsMap, ...sources: CellsMap[]) => {
 interface Initialize {
   (options: { gridSize: number; tickLength: number }): {
     cellObservers: Observer[];
+    start: () => void;
   };
 }
 
@@ -90,15 +91,17 @@ export const initialize: Initialize = ({ gridSize, tickLength }) => {
       }
     });
 
-    requestAnimationFrame(() => notifyCells(dyingCells, subscriptionsMap));
-    requestAnimationFrame(() => notifyCells(borningCells, subscriptionsMap));
-    requestAnimationFrame(() =>
-      updateCellsMap(aliveCellsMap, borningCells, dyingCells)
-    );
+    notifyCells(dyingCells, subscriptionsMap);
+    notifyCells(borningCells, subscriptionsMap);
+    updateCellsMap(aliveCellsMap, borningCells, dyingCells);
+
+    setTimeout(tick, tickLength);
   };
 
-  setTimeout(() => notifyCells(aliveCellsMap, subscriptionsMap));
-  setInterval(tick, tickLength);
+  const start = () => {
+    notifyCells(aliveCellsMap, subscriptionsMap);
+    tick();
+  };
 
   const cellObservers: Observer[] = positions.map((position) => {
     return {
@@ -107,5 +110,5 @@ export const initialize: Initialize = ({ gridSize, tickLength }) => {
     };
   });
 
-  return { cellObservers };
+  return { cellObservers, start };
 };

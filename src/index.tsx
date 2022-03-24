@@ -6,11 +6,11 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { initialize } from "./utils/engine";
 
-const { cellObservers } = initialize({ gridSize: 50, tickLength: 1000 });
+const { cellObservers, start } = initialize({ gridSize: 50, tickLength: 1000 });
 
 ReactDOM.render(
   <React.StrictMode>
-    <Root observers={cellObservers} />
+    <Root start={start} observers={cellObservers} />
   </React.StrictMode>,
   document.getElementById("root")
 );
