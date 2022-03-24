@@ -2,3 +2,11 @@
   box-sizing: border-box;
   border: 1px solid black;
 }
+
+.alive {
+  background: black;
+}
+
+.dead {
+  background: white;
+}

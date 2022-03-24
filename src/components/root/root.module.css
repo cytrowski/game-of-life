@@ -12,8 +12,3 @@
   background: lightblue;
   grid-template-columns: repeat(50, 1fr [col-start]);
 }
-
-.cell {
-  box-sizing: border-box;
-  border: 1px solid black;
-}
