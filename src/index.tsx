@@ -6,7 +6,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { initialize } from "./utils/engine";
 
-const { cellObservers } = initialize({ gridSize: 50, tickLength: 500 });
+const { cellObservers } = initialize({ gridSize: 50, tickLength: 5000 });
 
 ReactDOM.render(
   <React.StrictMode>

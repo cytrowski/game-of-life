@@ -15,7 +15,7 @@ import {
 type CellsMap = Map<Position, boolean>;
 
 const notifyCells = (
-  boardState: Map<Position, boolean>,
+  boardState: CellsMap,
   subscriptionsMap: SubscriptionsMap
 ) => {
   boardState.forEach((value, position) => {

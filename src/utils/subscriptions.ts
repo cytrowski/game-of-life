@@ -14,7 +14,7 @@ interface Subscription {
   observe: Observe;
 }
 
-export const makeSubscription = (): Subscription => {
+const makeSubscription = (): Subscription => {
   let subscriptionCallback: SubscriptionCallback | null;
 
   const observe: Observe = (callback) => {

@@ -13,7 +13,7 @@ export const Root = ({ observers }: Props) => {
   const customStyle = useMemo(
     () =>
       ({ "--board-size": Math.sqrt(observers.length) } as React.CSSProperties),
-    []
+    [observers.length]
   );
 
   return (
