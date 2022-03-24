@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef } from "react";
 import { Observe } from "../../utils/subscriptions";
 import classNames from "./cell.module.css";
 interface Props {
@@ -6,18 +6,16 @@ interface Props {
 }
 
 export const Cell = memo<Props>(({ observe }) => {
-  const [state, setState] = useState(false);
+  const cellRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!observe) {
       return;
     }
-    return observe(setState);
+    return observe((state) => {
+      cellRef.current?.classList.toggle(classNames.alive, state);
+    });
   }, [observe]);
 
-  const className = `${classNames.cell} ${
-    state ? classNames.alive : classNames.dead
-  }`;
-
-  return <div className={className} />;
+  return <div className={classNames.cell} ref={cellRef} />;
 });

@@ -90,11 +90,14 @@ export const initialize: Initialize = ({ gridSize, tickLength }) => {
       }
     });
 
-    notifyCells(dyingCells, subscriptionsMap);
-    updateCellsMap(aliveCellsMap, borningCells, dyingCells);
-    notifyCells(aliveCellsMap, subscriptionsMap);
+    requestAnimationFrame(() => notifyCells(dyingCells, subscriptionsMap));
+    requestAnimationFrame(() => notifyCells(borningCells, subscriptionsMap));
+    requestAnimationFrame(() =>
+      updateCellsMap(aliveCellsMap, borningCells, dyingCells)
+    );
   };
 
+  setTimeout(() => notifyCells(aliveCellsMap, subscriptionsMap));
   setInterval(tick, tickLength);
 
   const cellObservers: Observer[] = positions.map((position) => {

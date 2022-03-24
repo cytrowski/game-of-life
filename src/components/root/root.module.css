@@ -6,9 +6,10 @@
 
 .board {
   display: grid;
-  gap: 2px;
+  gap: 1px;
   width: 80vmin;
   height: 80vmin;
-  background: lightblue;
+  background: white;
+  border: 1px solid black;
   grid-template-columns: repeat(var(--board-size), 1fr [col-start]);
 }
