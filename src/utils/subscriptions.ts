@@ -1,7 +1,8 @@
 import { Position } from "./position";
 
+type Unsubscribe = () => void;
 export type SubscriptionCallback = (state: boolean) => void;
-export type Observe = (callback: SubscriptionCallback) => void;
+export type Observe = (callback: SubscriptionCallback) => Unsubscribe;
 export interface Observer {
   key: string;
   observe?: Observe;

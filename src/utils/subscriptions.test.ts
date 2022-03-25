@@ -22,15 +22,21 @@ describe("generateSubscruptionsFromPositions", () => {
 
     const callback = jest.fn();
 
-    firstSubscription?.observe(callback);
-    firstSubscription?.emit(true);
+    const unsubscribe = firstSubscription?.observe(callback);
 
+    firstSubscription?.emit(true);
     expect(callback).toHaveBeenCalledWith(true);
 
     firstSubscription?.emit(false);
-
     expect(callback).toHaveBeenCalledWith(false);
+    expect(callback).toHaveBeenCalledTimes(2);
 
+    expect(unsubscribe).toBeDefined();
+
+    // @ts-ignore
+    unsubscribe();
+
+    firstSubscription?.emit(false);
     expect(callback).toHaveBeenCalledTimes(2);
   });
 });
